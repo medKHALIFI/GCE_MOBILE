@@ -29,7 +29,7 @@ public class MissionList extends AppCompatActivity {
         gridView.setAdapter(adapter);
 
         //get data from sqlite
-        Cursor cursor =MainActivity.sqLiteHelper.getData("SELECT * FROM MISSION");
+        Cursor cursor =MainActivity.sqLiteHelper.getData("SELECT name , mission FROM MISSION");
         list.clear();
 
 
@@ -39,11 +39,10 @@ public class MissionList extends AppCompatActivity {
 
 
 
-
+        cursor.moveToFirst();
 
         if(!cursor.isAfterLast())
         {
-            cursor.moveToFirst();
                while (cursor.moveToNext()) {
                    /* int id = 0 ;//cursor.getInt(-1);
                     String name = cursor.getString(1);
@@ -52,29 +51,40 @@ public class MissionList extends AppCompatActivity {
 
                     list.add(new Mission(name, mission, image, id));
             */
+                  // Toast.makeText(getApplicationContext(),"NUMBER OF COLUMN  : "+cursor.getColumnCount(),Toast.LENGTH_SHORT).show();
+                   //Toast.makeText(getApplicationContext(),"COUNT  : "+cursor.getCount(),Toast.LENGTH_SHORT).show();
+
+                 /*  Toast.makeText(getApplicationContext(),"index 0  : "+cursor.getColumnName(0) ,Toast.LENGTH_SHORT).show();
+                   Toast.makeText(getApplicationContext(),"index 1  : "+cursor.getColumnName(1) ,Toast.LENGTH_SHORT).show();
+                   Toast.makeText(getApplicationContext(),"index 2  : "+cursor.getColumnName(2) ,Toast.LENGTH_SHORT).show();
+                   Toast.makeText(getApplicationContext(),"index 3  : "+cursor.getColumnName(3) ,Toast.LENGTH_SHORT).show();
+
+                  */
+
+                   // todo
 
                    String name = cursor.getString(cursor.getColumnIndex("name"));
-                   Toast.makeText(getApplicationContext(),"name  : "+cursor.getColumnIndex("name"),Toast.LENGTH_SHORT).show();
+                   Toast.makeText(getApplicationContext(),cursor.getColumnName(0)+" : "+name,Toast.LENGTH_SHORT).show();
 
 
 
 
-                   temp = cursor.getColumnIndex("id");
-                   Toast.makeText(getApplicationContext(),"id  : "+temp,Toast.LENGTH_SHORT).show();
+                  // temp = cursor.getColumnIndex("id");
+                   //Toast.makeText(getApplicationContext(),"id  : "+temp,Toast.LENGTH_SHORT).show();
 
 
 
-                   temp = cursor.getColumnIndex("name");
-                   Toast.makeText(getApplicationContext(),"name : "+temp,Toast.LENGTH_SHORT).show();
+                   //temp = cursor.getColumnIndex("name");
+                   //Toast.makeText(getApplicationContext(),"name : "+temp,Toast.LENGTH_SHORT).show();
 
 
 
-                   temp = cursor.getColumnIndex("mission");
-                   Toast.makeText(getApplicationContext(),"mission : "+temp,Toast.LENGTH_SHORT).show();
+                  // temp = cursor.getColumnIndex("mission");
+                   //Toast.makeText(getApplicationContext(),"mission : "+temp,Toast.LENGTH_SHORT).show();
 
 
-                   temp = cursor.getColumnIndex("image");
-                   Toast.makeText(getApplicationContext(),"image : "+temp,Toast.LENGTH_SHORT).show();
+                   //temp = cursor.getColumnIndex("image");
+                   //Toast.makeText(getApplicationContext(),"image : "+temp,Toast.LENGTH_SHORT).show();
                 }
         } else{
             Log.v("MyTag", "There are no countries in the data set");

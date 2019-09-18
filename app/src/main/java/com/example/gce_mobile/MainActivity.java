@@ -41,13 +41,15 @@ public class MainActivity extends AppCompatActivity {
     // save image to db
     //https://www.youtube.com/watch?v=C21N5mLvQiU
 
-    Button btnTakePic ;
+    Button btnTakePic, btn_location , btn_image;
     ImageView imageView ;
     String pathToFile ;
 
     // info mission
     EditText editName, editMission ;
     Button btnSave, btnList ;
+
+    String path = " ";
 
     final int REQUEST_CODE_GALLERY = 999;
 
@@ -111,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        btnTakePic =findViewById(R.id.btnTakePic);
+
         if (Build.VERSION.SDK_INT >= 23){
             requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
         }
@@ -124,8 +126,35 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        imageView = findViewById(R.id.image);
 
+
+
+        btn_location = (Button) findViewById(R.id.btn_location);
+
+        btn_location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(MainActivity.this, Get_location.class);
+                startActivity(myIntent);
+
+            }
+        });
+
+
+        btn_image = (Button) findViewById(R.id.btn_image);
+        btn_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                path="storage/emulated/0/Pictures/201950186609127110602278187   .jpg";
+                // test path image
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                // ici on va savoire le chemain vers notre image
+                Toast toast = Toast.makeText(getApplicationContext(), path, Toast.LENGTH_SHORT);
+
+                toast.show();
+                imageView.setImageBitmap(bitmap);
+            }
+        });
 
 
     }
@@ -165,6 +194,8 @@ public class MainActivity extends AppCompatActivity {
         editMission = (EditText)findViewById(R.id.editMission);
         btnSave = (Button) findViewById(R.id.btnSave);
         btnList = (Button) findViewById(R.id.btnList);
+        imageView = (ImageView) findViewById(R.id.image);
+        btnTakePic =findViewById(R.id.btnTakePic);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
@@ -177,6 +208,7 @@ public class MainActivity extends AppCompatActivity {
                 Bitmap bitmap = BitmapFactory.decodeFile(pathToFile);
                 // ici on va savoire le chemain vers notre image
                 Toast toast = Toast.makeText(getApplicationContext(), pathToFile, Toast.LENGTH_SHORT);
+                path = pathToFile ;
                 toast.show();
                 imageView.setImageBitmap(bitmap);
             }
@@ -210,7 +242,7 @@ public class MainActivity extends AppCompatActivity {
         File storageDir = getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         File image = null ;
         try {
-             image = File.createTempFile(name,".jpg",storageDir);
+            image = File.createTempFile(name,".jpg",storageDir);
             Toast toast = Toast.makeText(getApplicationContext(), "test ", Toast.LENGTH_SHORT);
             toast.show();
         } catch (IOException e) {
