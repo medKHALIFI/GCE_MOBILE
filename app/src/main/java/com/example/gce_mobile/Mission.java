@@ -4,10 +4,10 @@ public class Mission {
     private  int id ;
     private String name ;
     private String location;
-    private byte[] image;
+    private String image;
 
 
-    public  Mission(String name, String location , byte[] image, int id){
+    public  Mission(String name, String location , String image, int id){
         this.name =name ;
         this.location = location;
         this.image =image ;
@@ -40,11 +40,11 @@ public class Mission {
         this.location = location;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 }

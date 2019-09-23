@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         /// 2
         init();
         sqLiteHelper =new SQLiteHelper(this,"MissionDB.sqlite",null,1);
-        sqLiteHelper.queryData("CREATE TABLE IF NOT EXISTS MISSION (Id INTEGER PRIMARY KEY AUTOINCREMENT , name VARCHAR, mission VARCHAR, image BLOG)");
+        sqLiteHelper.queryData("CREATE TABLE IF NOT EXISTS MISSION (Id INTEGER PRIMARY KEY AUTOINCREMENT , name VARCHAR, mission VARCHAR, path VARCHAR)");
 
         btnList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +86,8 @@ public class MainActivity extends AppCompatActivity {
                     sqLiteHelper.insertData(
                             editName.getText().toString().trim(),
                             editMission.getText().toString().trim(),
-                            imageViewToByte(imageView)
+                            //imageViewToByte(imageView)
+                            path.toString().trim()
                     );
                     Toast.makeText(getApplicationContext(),"Added successfuly",Toast.LENGTH_SHORT).show();
 
@@ -145,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
         btn_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                path="storage/emulated/0/Pictures/201950186609127110602278187   .jpg";
+                path="storage/emulated/0/Pictures/201947183795183217611228022.jpg";
                 // test path image
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
                 // ici on va savoire le chemain vers notre image

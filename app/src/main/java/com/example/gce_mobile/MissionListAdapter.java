@@ -64,8 +64,12 @@ public class MissionListAdapter extends BaseAdapter {
         holder.txtName.setText(mission.getName());
         holder.txtLocation.setText(mission.getLocation());
 
-        byte[] missionImage = mission.getImage();
-        Bitmap bitmap = BitmapFactory.decodeByteArray(missionImage,0,missionImage.length);
+        String missionImage = mission.getImage();
+        // test path image
+        Bitmap bitmap = BitmapFactory.decodeFile(missionImage);
+
+
+        //Bitmap bitmap = BitmapFactory.decodeByteArray(missionImage,0,missionImage.length);
         holder.imageView.setImageBitmap(bitmap);
 
 

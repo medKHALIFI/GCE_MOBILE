@@ -20,14 +20,14 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
 
     // insert data to db
-    public void insertData(String name , String mission, byte[] image){
+    public void insertData(String name , String mission, String path){
         SQLiteDatabase database = getWritableDatabase();
         String sql = "insert into MISSION VALUES (NULL,?,?,?)" ;
         SQLiteStatement statement = database.compileStatement(sql);
         statement.clearBindings();
         statement.bindString(1,name);
         statement.bindString(2, mission);
-        statement.bindBlob(3,image);
+        statement.bindString(3,path);
 
         statement.executeInsert();
 
