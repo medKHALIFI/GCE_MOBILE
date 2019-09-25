@@ -25,8 +25,7 @@ public class MissionList extends AppCompatActivity {
         setContentView(R.layout.mission_list_activity);
         gridView = (GridView) findViewById(R.id.gridView);
         list = new ArrayList<>();
-        adapter= new MissionListAdapter(this, R.layout.mission_items,list);
-        gridView.setAdapter(adapter);
+
 
         //get data from sqlite
         Cursor cursor =MainActivity.sqLiteHelper.getData("SELECT * FROM MISSION");
@@ -35,7 +34,7 @@ public class MissionList extends AppCompatActivity {
 
         //cursor.moveToFirst();
         //cursor.moveToFirst();
-        int temp = 0 ;  //cursor.getInt(0);
+        //int temp = 0 ;  //cursor.getInt(0);
 
 
 
@@ -48,7 +47,7 @@ public class MissionList extends AppCompatActivity {
 
         while (cursor.moveToNext()) {
 
-            int id = cursor.getInt(0);
+                    int id = cursor.getInt(0);
                     String name = cursor.getString(1);
                     String mission =  cursor.getString(2);
                     String path = cursor.getString(3);
@@ -90,13 +89,28 @@ public class MissionList extends AppCompatActivity {
                    temp = cursor.getColumnIndex("path");
                    Toast.makeText(getApplicationContext(),"image : "+temp+" : "+cursor.getString(temp),Toast.LENGTH_SHORT).show();
                */
+
                 }
            // Toast.makeText(getApplicationContext(),"COUNT  : "+cursor.getCount(),Toast.LENGTH_LONG).show();
 
             Toast.makeText(getApplicationContext(),"out of while ",Toast.LENGTH_LONG).show();
 
-            adapter.notifyDataSetChanged();
-            Toast.makeText(getApplicationContext(),"COUNT  : "+cursor.getCount(),Toast.LENGTH_LONG).show();
+        //adapter= new CustomAdapter(dataModels,view.getContext());
+        //adapter= new MissionListAdapter(this.getApplicationContext(),1,list);
+
+
+
+        int a = list.size() ;
+        String temp  = String.valueOf(a) ;
+        Log.d("gce_test_mission", temp);
+
+        adapter= new MissionListAdapter(this, R.layout.mission_items,list);
+        gridView.setAdapter(adapter);
+
+        adapter.notifyDataSetChanged();
+
+
+        Toast.makeText(getApplicationContext(),"COUNT  : "+cursor.getCount(),Toast.LENGTH_LONG).show();
 
 
 

@@ -20,14 +20,16 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
 
     // insert data to db
-    public void insertData(String name , String mission, String path){
+    public void insertData(String localisation, String  name , String mission, String path){
         SQLiteDatabase database = getWritableDatabase();
-        String sql = "insert into MISSION VALUES (NULL,?,?,?)" ;
+        String sql = "insert into MISSION VALUES (NULL,?,?,?,?)" ;
         SQLiteStatement statement = database.compileStatement(sql);
         statement.clearBindings();
-        statement.bindString(1,name);
-        statement.bindString(2, mission);
-        statement.bindString(3,path);
+        // streem data
+        statement.bindString(1,localisation);
+        statement.bindString(2,name);
+        statement.bindString(3, mission);
+        statement.bindString(4,path);
 
         statement.executeInsert();
 

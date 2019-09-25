@@ -3,6 +3,7 @@ package com.example.gce_mobile;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,12 @@ public class MissionListAdapter extends BaseAdapter {
         this.context = context;
         this.layout = layout;
         this.missionsList = missionsList;
+        int a = missionsList.size() ;
+        String temp  = String.valueOf(a) ;
+        Log.d("gce_test_adapter", temp);
+        //Log.d("gce", "test logcat inside adapter");
+
+
     }
 
     @Override
@@ -62,9 +69,11 @@ public class MissionListAdapter extends BaseAdapter {
         }
         Mission mission = missionsList.get(position);
         holder.txtName.setText(mission.getName());
+        Log.d("gce_test_adapter_name", mission.getName().toString());
         holder.txtLocation.setText(mission.getLocation());
 
         String missionImage = mission.getImage();
+        Log.d("gce_test_adapter_image", mission.getImage().toString());
         // test path image
         Bitmap bitmap = BitmapFactory.decodeFile(missionImage);
 
@@ -73,6 +82,7 @@ public class MissionListAdapter extends BaseAdapter {
         holder.imageView.setImageBitmap(bitmap);
 
 
+        Log.d("gce_test","get view : "+missionImage );
         return row;
     }
 }

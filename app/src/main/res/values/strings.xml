@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GCE_MOBILE</string>
+    <string name="title_activity_maps_view_photo">Map</string>
 </resources>
