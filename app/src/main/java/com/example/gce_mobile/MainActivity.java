@@ -39,6 +39,9 @@ import java.util.List;
 import java.util.Locale;
 
 
+// chanel to  drive codes
+// https://www.crazycodersclub.com/category/android/
+
 import static android.os.Environment.getExternalStoragePublicDirectory;
 
 public class MainActivity extends AppCompatActivity implements LocationListener {
@@ -56,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     // info mission
     EditText editName, editMission ;
-    Button btnSave, btnList ;
+    Button btnSave, btnList, listMap ;
 
     String path = " ";
 
@@ -107,6 +110,22 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             }
         });*/
 
+
+    ////// ************* list all saved items in the map
+        listMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent intent = new Intent(MainActivity.this ,MapsListAllPhoto.class);
+                startActivity(intent);
+            }
+        });
+
+
+
+
+        /// ********* save item in DB
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
 
@@ -260,6 +279,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         btnList = (Button) findViewById(R.id.btnList);
         imageView = (ImageView) findViewById(R.id.image);
         btnTakePic =findViewById(R.id.btnTakePic);
+
+        // list all in the map
+        listMap = (Button) findViewById(R.id.btnListMap);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data){

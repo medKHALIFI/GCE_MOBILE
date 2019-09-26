@@ -38,8 +38,11 @@
             android:value="@string/google_maps_key" />
 
         <activity
+            android:name=".MapsListAllPhoto"
+            android:label="@string/title_activity_maps_list_all_photo"></activity>
+        <activity
             android:name=".MapsActivityViewPhoto"
-            android:label="@string/title_activity_maps_view_photo"></activity>
+            android:label="@string/title_activity_maps_view_photo" />
         <activity android:name=".ViewData" />
         <activity android:name=".Save_image" />
         <activity android:name=".Get_location" />
