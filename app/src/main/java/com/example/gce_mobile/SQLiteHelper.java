@@ -26,6 +26,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         SQLiteStatement statement = database.compileStatement(sql);
         statement.clearBindings();
         // streem data
+        //statement.bindint(1,localisation);
         statement.bindString(1,localisation);
         statement.bindString(2,name);
         statement.bindString(3, mission);
@@ -33,6 +34,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         statement.executeInsert();
 
+    }
+
+    public void delete(int id) {
+        SQLiteDatabase database = getReadableDatabase();
+        database.execSQL("delete from MISSION where Id='"+id+"'");
     }
 
     // get all the data from db

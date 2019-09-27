@@ -19,7 +19,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -37,6 +36,7 @@ public class ViewData extends AppCompatActivity {
 
     // test
     // for location image
+    ArrayList<Integer> mIds =new ArrayList<Integer>();
     ArrayList<String> mLocationImage = new ArrayList<String>();
     ArrayList<String> mTitle = new ArrayList<String>();
     ArrayList<String> mDescription = new ArrayList<String>();
@@ -60,7 +60,9 @@ public class ViewData extends AppCompatActivity {
         //for(int i =0 ;i< 5;i++)
         {
             Log.d("mylog","inside while : ");
-            //int id = cursor.getInt(0);
+            //
+            int id = cursor.getInt(0);
+            Log.d("mylog","inside while id : "+id);
             String localisation =  cursor.getString(1);
             String name = cursor.getString(2);
             String mission = cursor.getString(3);
@@ -68,6 +70,7 @@ public class ViewData extends AppCompatActivity {
             //mTitle[i] = name ;
 
 
+            mIds.add(id);
             mLocationImage.add(localisation);
             mTitle.add(name); //this adds an element to the list.
             mDescription.add(mission); //this adds an element to the list.
@@ -88,7 +91,7 @@ public class ViewData extends AppCompatActivity {
 
         listview = findViewById(R.id.listView);
         // now create an adapter
-        MyAdapter adapter = new MyAdapter(this , mLocationImage,mTitle,mDescription,images);
+        MyAdapter adapter = new MyAdapter(this ,mIds, mLocationImage,mTitle,mDescription,images);
         listview.setAdapter(adapter);
 
 
@@ -135,18 +138,20 @@ public class ViewData extends AppCompatActivity {
     class MyAdapter extends ArrayAdapter<String>{
         Context context ;
         //String rTitle[];
+        ArrayList<Integer> rIds ;
         ArrayList<String> rLocationImage ;
         ArrayList<String> rTitle ;
         ArrayList<String> rDescription;
         ArrayList<String>  rImage;
 
-        MyAdapter(Context c,ArrayList<String> locationImage, ArrayList<String> title,ArrayList<String> description,   ArrayList<String> images){
-            super(c,R.layout.row,R.id.textView1,title);
+        MyAdapter(Context c,ArrayList<Integer> ids,ArrayList<String> locationImage, ArrayList<String> title,ArrayList<String> description,   ArrayList<String> images){
+            super(c,R.layout.row,R.id.textViewTitle,title);
             this.context = c;
 
             // test
             Log.d("mylog","inside adapter : ");
 
+            this.rIds = ids ;
             this.rLocationImage = locationImage;
             this.rTitle = title;
             this.rDescription =description;
@@ -160,9 +165,10 @@ public class ViewData extends AppCompatActivity {
 
             View row  = layoutInflater.inflate(R.layout.row, parent,false);
             ImageView images =row.findViewById(R.id.image);
-            TextView myTitle = row.findViewById(R.id.textView1);
-            TextView myDescription = row.findViewById(R.id.textView2);
-            TextView myLocationImage = row.findViewById(R.id.textView3);
+            TextView myTitle = row.findViewById(R.id.textViewTitle);
+            TextView myDescription = row.findViewById(R.id.textViewMission);
+            TextView myLocationImage = row.findViewById(R.id.textViewLocation);
+            TextView myId = row.findViewById(R.id.textViewId);
 
             // now set our resources on views
             //images.setImageResource(rImage[position]);
@@ -171,6 +177,8 @@ public class ViewData extends AppCompatActivity {
 
             images.setImageBitmap(bitmap);
 
+            Log.d("mylog","the ids : "+ rIds.get(position));
+            myId.setText(rIds.get(position).toString());
             myTitle.setText(rTitle.get(position)) ;
             myDescription.setText(rDescription.get(position));
             myLocationImage.setText(rLocationImage.get(position));

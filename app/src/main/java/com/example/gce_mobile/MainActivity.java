@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     // info mission
     EditText editName, editMission ;
-    Button btnSave, btnList, listMap ;
+    Button btnSave, btnList, listMap , SyncData;
 
     String path = " ";
 
@@ -122,6 +122,18 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             }
         });
 
+
+        // **************  sync data to google sheets
+
+        SyncData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent intent = new Intent(MainActivity.this ,SyncData.class);
+                startActivity(intent);
+            }
+        });
 
 
 
@@ -282,6 +294,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
         // list all in the map
         listMap = (Button) findViewById(R.id.btnListMap);
+
+        // SyncData
+        SyncData = (Button) findViewById(R.id.btnSyncData);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
