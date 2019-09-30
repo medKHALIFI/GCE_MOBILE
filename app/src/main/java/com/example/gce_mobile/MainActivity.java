@@ -7,7 +7,9 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -23,12 +25,16 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -59,9 +65,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     // info mission
     EditText editName, editMission ;
-    Button btnSave, btnList, listMap , SyncData;
+    Button btnSave, btnList, listMap , SyncData,btnDialog;
 
     String path = " ";
+
+
+    TextView txtViewMission ;
 
     final int REQUEST_CODE_GALLERY = 999;
 
@@ -74,6 +83,51 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        // gps enabel
+        LocationManager lm = (LocationManager)(MainActivity.this).getSystemService(Context.LOCATION_SERVICE);
+        boolean gps_enabled = false;
+        boolean network_enabled = false;
+
+        try {
+            gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        } catch(Exception ex) {}
+
+        try {
+            network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        } catch(Exception ex) {}
+
+        if(!gps_enabled && !network_enabled) {
+            // notify user
+
+
+            final AlertDialog.Builder inputAlert = new AlertDialog.Builder(MainActivity.this);
+            inputAlert.setTitle("GPS");
+            inputAlert.setMessage("Ouvrir le GPS");
+
+            inputAlert.setPositiveButton("ouvrir", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    (MainActivity.this).startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                }
+            });
+
+            AlertDialog alertDialog = inputAlert.create();
+            alertDialog.show();
+
+
+
+
+        }
+
+
+
+
+        // end gps enabel
+
+
+
 
         /// to get location
         getSupportActionBar().hide();
@@ -96,6 +150,49 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
         /// 2
         init();
+
+
+        // function to display dialig
+        DialogFunction();
+
+        // test button dyalog
+
+        txtViewMission = (TextView)findViewById(R.id.textViewMission);
+
+        Button dialogButton = (Button)findViewById(R.id.btnDialog);
+        dialogButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                DialogFunction();
+                /*
+                final AlertDialog.Builder inputAlert = new AlertDialog.Builder(MainActivity.this);
+                inputAlert.setTitle("Title of the Input Box");
+                inputAlert.setMessage("We need your name to proceed");
+                final EditText userInput = new EditText(MainActivity.this);
+                inputAlert.setView(userInput);
+                inputAlert.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String userInputValue = userInput.getText().toString();
+                        Toast.makeText(getApplicationContext(),"here is your msg : "+userInputValue,Toast.LENGTH_SHORT).show();
+                    }
+                });
+                inputAlert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog alertDialog = inputAlert.create();
+                alertDialog.show();
+            */
+            }
+
+        });
+
+        // end test button dialoge
+
         sqLiteHelper =new SQLiteHelper(this,"MissionDB.sqlite",null,1);
         sqLiteHelper.queryData("CREATE TABLE IF NOT EXISTS MISSION (Id INTEGER PRIMARY KEY AUTOINCREMENT , localisation VARCHAR, name VARCHAR, mission VARCHAR, path VARCHAR)");
 
@@ -149,14 +246,15 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                     sqLiteHelper.insertData(
                             locationImage.trim(),
                             editName.getText().toString().trim(),
-                            editMission.getText().toString().trim(),
+                          //  editMission.getText().toString().trim(),
+                            txtViewMission.getText().toString(),
                             //imageViewToByte(imageView)
                             path.toString().trim()
                     );
                     Toast.makeText(getApplicationContext(),"Added successfuly",Toast.LENGTH_SHORT).show();
 
                     editName.setText("");
-                    editMission.setText("");
+                    //editMission.setText("");
                     imageView.setImageResource(R.mipmap.ic_launcher);
                     // todo change icon to image
                 }
@@ -236,6 +334,31 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         });
 
 
+    }
+
+
+    public void DialogFunction(){
+        final AlertDialog.Builder inputAlert = new AlertDialog.Builder(MainActivity.this);
+        inputAlert.setTitle("Mission");
+        inputAlert.setMessage("Entrer le nom de la mission");
+        final EditText userInput = new EditText(MainActivity.this);
+        inputAlert.setView(userInput);
+        inputAlert.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String userInputValue = userInput.getText().toString();
+                Toast.makeText(getApplicationContext(),"here is your msg : "+userInputValue,Toast.LENGTH_SHORT).show();
+                txtViewMission.setText(userInputValue);
+            }
+        });
+        inputAlert.setNegativeButton("fermer", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog alertDialog = inputAlert.create();
+        alertDialog.show();
     }
 
 

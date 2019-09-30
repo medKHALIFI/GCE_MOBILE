@@ -2,6 +2,7 @@ package com.example.gce_mobile;
 
 import android.app.DownloadManager;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -201,7 +202,7 @@ function doGet(e) {
 
 public class SyncData extends AppCompatActivity {
 
-    Button btnSyncData ;
+    Button btnSyncData, btnListData ;
     String userImage ;
     Bitmap rbitmap;
 
@@ -212,6 +213,20 @@ public class SyncData extends AppCompatActivity {
         setContentView(R.layout.activity_sync_data);
 
         btnSyncData= (Button)findViewById(R.id.btnSyncData);
+
+        btnListData =(Button)findViewById(R.id.btnListData);
+
+
+
+        btnListData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),DataList.class);
+                startActivity(intent);
+
+            }
+        });
+
 
         btnSyncData.setOnClickListener(new View.OnClickListener() {
             @Override

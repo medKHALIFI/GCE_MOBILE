@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:layout_editor_absoluteY="81dp"
+    tools:layout_editor_absoluteX="0dp">
+
+
+    <TextView
+        android:id="@+id/tv_uid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+
+        android:text="TextView"
+        android:textColor="#111111"
+        android:textSize="8sp"
+        android:visibility="invisible"
+        app:layout_constraintHorizontal_bias="0.048"
+        app:layout_constraintLeft_toRightOf="@+id/imageView3"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView3"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1" />
+
+    <TextView
+        android:id="@+id/tv_uname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+
+        android:textColor="#646566"
+        android:textSize="25dp"
+
+
+        app:layout_constraintLeft_toLeftOf="@+id/tv_uid"
+        app:layout_constraintTop_toBottomOf="@+id/tv_uid"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintTop_creator="1" />
+
+    <TextView
+        android:id="@+id/tv_umission"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="32dp"
+
+
+        android:text="TextView"
+        android:textColor="#646566"
+        android:textSize="25dp"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_uid"
+        app:layout_constraintTop_toBottomOf="@+id/tv_uid"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintTop_creator="1" />
+
+    <TextView
+        android:id="@+id/tv_ulocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="64dp"
+
+
+        android:text="TextView"
+        android:textColor="#646566"
+        android:textSize="25dp"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_uid"
+        app:layout_constraintTop_toBottomOf="@+id/tv_uid"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintTop_creator="1" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="102dp"
+        android:layout_height="118dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/tv_uname"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/amu_bubble_mask"
+        tools:layout_constraintTop_creator="1" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

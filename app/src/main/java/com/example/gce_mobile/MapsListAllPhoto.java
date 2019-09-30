@@ -145,6 +145,11 @@ public class MapsListAllPhoto extends FragmentActivity implements OnMapReadyCall
         }
         // adapt our camera
         // Add a marker in Sydney and move the camera
+        if (lat == 0) {
+            lat = (float) 33.972362;
+            log = (float) -6.879582;
+
+        }
         LatLng centrer = new LatLng(lat, log);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(centrer, 16.2f));
         //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
