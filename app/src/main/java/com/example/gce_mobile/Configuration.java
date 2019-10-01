@@ -12,7 +12,7 @@ public class Configuration {
     //public static final String APP_SCRIPT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyD8KwGDXKX5_ntvTCpjj5l6XkyakmIBIRLAtLZFKPe6XVAnuM/exec";
 
     // gce drive
-    //public static final String APP_SCRIPT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyD8KwGDXKX5_ntvTCpjj5l6XkyakmIBIRLAtLZFKPe6XVAnuM/exec";
+    //public static final String APP_SCRIPT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzqeqd66ns_dXLlO0wpnwnuyNzjTtHV5b6UGkW-i61ELaxlUfAq/exec";
 
     public static final String ADD_USER_URL = APP_SCRIPT_WEB_APP_URL;
     public static final String LIST_USER_URL = APP_SCRIPT_WEB_APP_URL+"?action=readAll";
