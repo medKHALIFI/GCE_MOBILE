@@ -306,7 +306,13 @@ public class SyncData extends AppCompatActivity {
             rbitmap = getResizedBitmap(bitmap,800);//Setting the Bitmap to ImageView
             userImage = getStringImage(rbitmap);
 
-            Log.d("mylog","out while : ");
+            Log.d("sync","out while : "+userId);
+        Log.d("sync","out while : "+userName);
+        Log.d("sync","out while : "+userlocation);
+        Log.d("sync","out while : "+usermission);
+        Log.d("sync","out while : "+pathFile);
+
+
 // *****************
 
 
